@@ -12,5 +12,9 @@ export class Shell {
 	run(
 		command: string,
 		doPrint: boolean
-	) {}
+	): Promise<{
+		stdout: arr[],
+		stderr: arr[],
+		hasErros: boolean
+	}>
 }
