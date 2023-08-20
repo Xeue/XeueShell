@@ -15,6 +15,6 @@ export class Shell {
 	): Promise<{
 		stdout: arr[],
 		stderr: arr[],
-		hasErros: boolean
+		hasErrors: boolean
 	}>
 }
