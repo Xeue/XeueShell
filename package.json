@@ -1,0 +1,22 @@
+{
+  "name": "xeue-shell",
+  "version": "1.0.0",
+  "description": "Small node package for running shell commands",
+  "main": "shell.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Xeue/XeueShell.git"
+  },
+  "author": "Sam Chilton",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Xeue/XeueShell/issues"
+  },
+  "homepage": "https://github.com/Xeue/XeueShell#readme",
+  "dependencies": {
+    "xeue-logs": "^1.7.5"
+  }
+}
