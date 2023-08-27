@@ -26,8 +26,6 @@ class Shell extends EventEmitter {
 	}
 
     run(command, doPrint = true) {
-        const commandEventEmitter = new EventEmitter();
-
         const commandOutput = new Promise((resolve, reject) => {
             const stdout = [];
             const stderr = [];
