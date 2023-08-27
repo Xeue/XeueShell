@@ -1,6 +1,6 @@
 {
   "name": "xeue-shell",
-  "version": "1.0.3",
+  "version": "1.1.0",
   "description": "Small node package for running shell commands",
   "main": "shell.js",
   "scripts": {
@@ -17,6 +17,6 @@
   },
   "homepage": "https://github.com/Xeue/XeueShell#readme",
   "dependencies": {
-    "xeue-logs": "^1.7.5"
+    "xeue-logs": "^2.0.0"
   }
 }
