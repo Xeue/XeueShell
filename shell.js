@@ -9,6 +9,7 @@ class Shell extends EventEmitter {
         logsLevel = 'C',
         shell
 	) {
+        super();
 		if (logger) {
 			this.logger = logger;
 		} else {
