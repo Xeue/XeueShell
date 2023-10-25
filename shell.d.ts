@@ -15,6 +15,15 @@ export class Shell {
 	): Promise<{
 		stdout: arr[],
 		stderr: arr[],
-		hasErrors: boolean
+		hasErrors: boolean,
+		execProcess: ChildProcess
 	}>
+
+	process(
+		command: string,
+		doPrint: boolean
+	): {
+		kill: Function,
+		execProcess: ChildProcess
+	}
 }

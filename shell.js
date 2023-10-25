@@ -69,6 +69,43 @@ class Shell extends EventEmitter {
 
         return commandOutput;
     }
+
+    process(command, doPrint = true) {
+        const process = new EventEmitter();
+
+        const shellOptions = {};
+        if (this.shell) shellOptions.shell = this.shell
+        const proc = exec(command, shellOptions);
+
+        process.execProcess = proc;
+
+        proc.stdout.on('data', data => {
+            const output = data.trim();
+
+            process.emit('stdout', output);
+
+            if (output != "" && doPrint) this.logger.log(output, [this.logsLevel, this.logsText, this.logger.p])
+        });
+        proc.stderr.on('data', data => {
+            const output = data.trim();
+
+            process.emit('stderr', output);
+
+            if (output != "" && doPrint) this.logger.log(output, [this.logsLevel, this.logsText, this.logger.r])
+        });
+        proc.on('exit', () => {
+            process.emit('exit');
+        });
+        proc.on('error', error => {
+            process.emit('error', error);
+        });
+
+        process.kill = () => {
+            proc.kill()
+        };
+
+        return process;
+    }
 }
 
 module.exports.Shell = Shell;
