@@ -19,6 +19,10 @@ export class Shell {
 		execProcess: ChildProcess
 	}>
 
+	runSync(
+		command: string
+	): string
+
 	process(
 		command: string,
 		doPrint: boolean

@@ -1,6 +1,6 @@
 const EventEmitter = require('events');
 const {Logs} = require('xeue-logs');
-const {exec} = require('child_process');
+const {exec, execSync} = require('child_process');
 
 class Shell extends EventEmitter {
 	constructor(
@@ -68,6 +68,12 @@ class Shell extends EventEmitter {
         });
 
         return commandOutput;
+    }
+
+    runSync(command) {
+        const shellOptions = {};
+        if (this.shell) shellOptions.shell = this.shell
+        return execSync(command, shellOptions).toString();
     }
 
     process(command, doPrint = true) {
