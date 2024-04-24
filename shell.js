@@ -1,6 +1,7 @@
 const EventEmitter = require('events');
 const {Logs} = require('xeue-logs');
 const {exec, execSync} = require('child_process');
+const terminate = require('terminate');
 
 class Shell extends EventEmitter {
 	constructor(
@@ -106,8 +107,9 @@ class Shell extends EventEmitter {
             process.emit('error', error);
         });
 
-        process.kill = () => {
-            proc.kill()
+        process.kill = signal => {
+            //proc.kill(signal)
+            terminate(proc.pid, error => this.logger.error('Error killing process', error))
         };
 
         return process;
