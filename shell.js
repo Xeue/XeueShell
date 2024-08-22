@@ -17,7 +17,7 @@ class Shell extends EventEmitter {
 			this.logger = new Logs(
 				false,
 				'shellLogging',
-				path.join(__data, 'shellLogging'),
+				'shellLogging',
 				'D',
 				false
 			)
@@ -108,12 +108,54 @@ class Shell extends EventEmitter {
         });
 
         process.kill = signal => {
-            //proc.kill(signal)
             terminate(proc.pid, error => this.logger.error('Error killing process', error))
         };
 
         return process;
     }
+
+
+    bash(doPrint = true) {
+        const process = new EventEmitter();
+
+        const shellOptions = {};
+        if (this.shell) shellOptions.shell = this.shell
+        const bash = exec('bash', shellOptions);
+
+        process.bash = bash;
+
+        bash.stdout.on('data', data => {
+            const output = data.trim();
+
+            process.emit('stdout', output);
+
+            if (output != "" && doPrint) this.logger.log(output, [this.logsLevel, this.logsText, this.logger.p])
+        });
+        bash.stderr.on('data', data => {
+            const output = data.trim();
+
+            process.emit('stderr', output);
+
+            if (output != "" && doPrint) this.logger.log(output, [this.logsLevel, this.logsText, this.logger.r])
+        });
+        bash.on('exit', () => {
+            process.emit('exit');
+        });
+        bash.on('error', error => {
+            process.emit('error', error);
+        });
+
+        process.kill = signal => {
+            terminate(bash.pid, error => this.logger.error('Error killing process', error))
+        };
+
+        process.run = input => {
+            bash.stdin.write(`${input}\n`);
+        }
+
+        return process;
+    }
+
 }
 
 module.exports.Shell = Shell;

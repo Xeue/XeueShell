@@ -8,7 +8,6 @@ export class Shell {
         shell: string
     ) {}
 
-
 	run(
 		command: string,
 		doPrint: boolean
@@ -29,5 +28,13 @@ export class Shell {
 	): {
 		kill: Function,
 		execProcess: ChildProcess
+	}
+
+	bash(
+		doPrint: boolean
+	): {
+		kill: Function,
+		bash: ChildProcess,
+		run: Function
 	}
 }
