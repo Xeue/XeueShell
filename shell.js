@@ -108,7 +108,15 @@ class Shell extends EventEmitter {
         });
 
         process.kill = signal => {
-            terminate(proc.pid, error => this.logger.error('Error killing process', error))
+            terminate(proc.pid, error => {
+                if (error) {
+                    if (error.message.includes('No such process')) {
+                        this.logger.error('Process already killed')
+                    } else {
+                        this.logger.error('Error killing process', error)
+                    }
+                }
+            })
         };
 
         return process;
@@ -146,7 +154,15 @@ class Shell extends EventEmitter {
         });
 
         process.kill = signal => {
-            terminate(bash.pid, error => this.logger.error('Error killing process', error))
+            terminate(bash.pid, error => {
+                if (error) {
+                    if (error.message.includes('No such process')) {
+                        this.logger.error('Process already killed')
+                    } else {
+                        this.logger.error('Error killing process', error)
+                    }
+                }
+            })
         };
 
         process.run = input => {

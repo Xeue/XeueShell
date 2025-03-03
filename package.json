@@ -1,6 +1,6 @@
 {
   "name": "xeue-shell",
-  "version": "1.4.1",
+  "version": "1.4.2",
   "description": "Small node package for running shell commands",
   "main": "shell.js",
   "scripts": {
