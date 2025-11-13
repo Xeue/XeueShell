@@ -1,10 +1,12 @@
 {
   "name": "xeue-shell",
-  "version": "1.4.2",
+  "version": "2.0.0",
   "description": "Small node package for running shell commands",
-  "main": "shell.js",
+  "main": "dist/shell.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prepack": "tsc",
+    "types:check": "tsc --noEmit"
   },
   "repository": {
     "type": "git",
@@ -18,6 +20,10 @@
   "homepage": "https://github.com/Xeue/XeueShell#readme",
   "dependencies": {
     "terminate": "^2.6.1",
-    "xeue-logs": "^2.0.0"
+    "xeue-logs": "^3.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^24.10.1",
+    "typescript": "^5.9.3"
   }
 }
